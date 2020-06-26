@@ -1,0 +1,110 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+            {% include('gestion/_addpackage.twig') %}
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Package</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Package</a></li>
+                                <li class="breadcrumb-item active">Liste</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-lg-11">
+                    <div class="mb-5">
+                        <h4>Liste des Packages</h4>
+                    </div>
+                </div>
+                <div class="col-lg-1 pull-right">
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target=".bs-example-modal-xl">Ajouter</button>
+                </div>
+            </div>
+            <div class="row" id="package_panel">
+                {% for package in packages %}
+                <div class="col-xl-3 col-md-6" id="pkcol{{ package.pk_id }}" >
+                    <div class="card plan-box">
+                        <div class="card-body p-4">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5>{{ package.pk_name }}</h5>
+                                    <small class="text-muted">{{ package.pk_description | slice(0, 50)}}</small>
+                                </div>
+                                <div class="ml-3">
+                                    <i class="{{ package.pk_icon }} h1 text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="py-4">
+                                <input type="hidden" value="{{ package.pk_price }}" class="packageprice"  onclick="setcommas(this.value,'{{ package.pk_id }}')">
+                                <h2 id="showpackageprice_{{ package.pk_id }}"></h2>
+                            </div>
+                            <div class="contenttoreload{{ package.pk_id }}">
+                                <div class="text-center plan-btn ">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupVerticalDrop1" type="button" class="btn btn-info-outline btn-sm dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action <i class="mdi mdi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                               onclick="updatePackage('{{ package.pk_id }}')"
+                                            >Modifier</a>
+                                             <a class="dropdown-item" href="#" onclick="deletePackage('{{  package.pk_id }}')">Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="plan-features{{ package.pk_id }} mt-5" id="features{{ package.pk_id }}">
+                                    {% for item in items(package.pk_id) %}
+                                        <p>
+                                            <i class="bx bx-checkbox-square text-primary mr-2"></i> {{ item.item }}
+                                            <b class="float-lg-right">
+                                                <a href="javascript:void(0)" onclick="deletepkItem('{{ item.pk_item_id }}')"><i class="mdi mdi-trash-can text-danger"></i></a>
+                                            </b>
+                                        </p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="row align-content-center">
+                                <div class="row mb-3 additempk_{{ package.pk_id }}" style="display: none;" >
+                                    <div class="col-lg-8">
+                                        <div class="">
+                                            <input type="text" class="form-control form-control-sm item_pk_{{ package.pk_id }} ">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="">
+                                            <button type="submit" class="btn btn-success editable-submit btn-sm  btn-rounded waves-effect waves-light submissionbtn{{ package.pk_id }} "  onclick="submitpkitem('{{ package.pk_id }}')"><i class="mdi mdi-check"></i></button>
+                                            <button type="button" class="btn btn-danger editable-cancel btn-sm btn-rounded waves-effect waves-light" id="hideitemview{{ package.pk_id }}" onclick="hideaddpkitem('{{ package.pk_id }}')"><i class="mdi mdi-eye-off"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="javascript:void(0)" class="badge badge-sm badge-info offset-5 col-lg-2 " onclick="showaddpkitem('{{ package.pk_id }}')"><i class="mdi mdi-plus"></i> item</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+</div>
+{% endblock %}

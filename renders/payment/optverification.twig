@@ -1,0 +1,84 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Verification OTP</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Application</a></li>
+                                <li class="breadcrumb-item active">Verification</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row justify-content-center mt-lg-5" id="checkbeforestartcard">
+                <div class="col-xl-5 col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10">
+                                        <h4 class="mt-4 font-weight-semibold">OTP Verification</h4>
+                                        <p class="text-muted mt-3">Pour acceder au menu de paiement veuillez passer l'authentification à deux facteurs</p>
+
+                                        <div class="mt-4">
+                                            <button type="button" class="btn btn-primary" id="checkbeforestart">
+                                                Commencer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-lg-5" style="display: none" id="passwordcheckcard">
+                <div class="col-xl-5 col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10">
+                                        <h4 class="mt-4 font-weight-semibold">OTP Verification</h4>
+                                        <p class="text-muted mt-3">Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis perferendis asperiores repellat.</p>
+
+                                        <input type="password" id="checkpassword" class="form-control" placeholder="Mot de passe">
+                                        <div class="mt-4">
+                                            <button type="button" class="btn btn-primary"  id="verificationModal" onclick="paiementcheck()">
+                                                Valider le mot de passe
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0">Clients</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <select name="" id="structure" class="form-control">
+                            <option disabled selected>Selectionner le type de structure</option>
+                            {% for structure in structures %}
+                            <option value="{{ structure.sid }}">{{ structure.structure_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" placeholder="nom de la structure" id="denomination">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-6">
+                        <input type="email" class="form-control" id="email" placeholder="email">
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="telephone" placeholder="telephone">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="ville" placeholder="ville">
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="pays" placeholder="pays">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="adresse" placeholder="adresse">
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="site" placeholder="site web">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="customerId">
+                <button type="button" class="btn btn-secondary" id="addcustomer_dismiss" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addcustomers" onclick="addcustomer()">Ajouter</button>
+                <button type="button" class="btn btn-success" id="updatecustomer" style="display: none;" onclick="Updatecustomer()">Modifier</button>
+            </div>
+        </div>
+    </div>
+</div>

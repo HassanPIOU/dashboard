@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/libs/toastr/build/toastr.min.css">
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/custom.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <link href="/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Summernote css -->
+    <link href="/assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/libs/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+
+    <link href="/js/lib/css/main" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body data-sidebar="dark" onload="getfacebookCount()">
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box">
+                    <a href="/" class="logo logo-dark">
+                                <span class="logo-sm" style="font-size: 18px; color: #fff;">
+                                    APP
+                                </span>
+                        <span class="logo-lg" style="font-size: 18px; color: #fff;">
+                                    {{ business().name }}
+                                </span>
+                    </a>
+
+                    <a href="#" class="logo logo-light" style="font-size: 18px;color: #fff; ">
+                                <span class="logo-sm">
+                                 APP
+                                </span>
+                        <span class="logo-lg" style="font-size: 18px;color: #fff; ">
+                                    {{ business().name }}
+                                </span>
+                    </a>
+                </div>
+
+                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+
+                <!-- App Search-->
+
+
+            </div>
+
+            <div class="d-flex">
+
+
+                <div class="dropdown d-inline-block d-lg-none ml-2">
+                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                         aria-labelledby="page-header-search-dropdown">
+
+                        <form class="p-3">
+                            <div class="form-group m-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="dropdown d-none d-lg-inline-block ml-1">
+                    <button type="button" class="btn header-item noti-icon waves-effect"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-customize"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <div class="px-lg-2">
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/github.png" alt="Github">
+                                        <span>GitHub</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/bitbucket.png" alt="bitbucket">
+                                        <span>Bitbucket</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/dribbble.png" alt="dribbble">
+                                        <span>Dribbble</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/dropbox.png" alt="dropbox">
+                                        <span>Dropbox</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/mail_chimp.png" alt="mail_chimp">
+                                        <span>Mail Chimp</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/assets/images/brands/slack.png" alt="slack">
+                                        <span>Slack</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-bell bx-tada"></i>
+                        <span style="margin-left: -7px;" class="badge badge-danger badge-pill">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                         aria-labelledby="page-header-notifications-dropdown">
+                        <div class="p-3">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-0"> Notifications </h6>
+                                </div>
+                                <div class="col-auto">
+                                    <a href="#!" class="small"> View All</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-simplebar style="max-height: 230px;">
+                            <a href="#" class="text-reset notification-item">
+                                <div class="media">
+                                    <div class="avatar-xs mr-3">
+                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                    <i class="bx bx-cart"></i>
+                                                </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1">If several languages coalesce the grammar</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="text-reset notification-item">
+                                <div class="media">
+                                    <img src="/assets/images/users/avatar-3.jpg"
+                                         class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                    <div class="media-body">
+                                        <h6 class="mt-0 mb-1">James Lemire</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1">It will seem like simplified English.</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="text-reset notification-item">
+                                <div class="media">
+                                    <div class="avatar-xs mr-3">
+                                                <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                    <i class="bx bx-badge-check"></i>
+                                                </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mt-0 mb-1">Your item is shipped</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1">If several languages coalesce the grammar</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#" class="text-reset notification-item">
+                                <div class="media">
+                                    <img src="/assets/images/users/avatar-4.jpg"
+                                         class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                    <div class="media-body">
+                                        <h6 class="mt-0 mb-1">Salena Layfield</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="p-2 border-top">
+                            <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                                <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" id="iconprofiluser" src="/uploads/users/{{ auth().avatar  }}"
+                             alt="Header Avatar">
+                        <span class="d-none d-xl-inline-block ml-1"> {{ auth().username }}</span>
+                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="/account-profil"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Profil</a>
+                        <a class="dropdown-item" href="/ecran-de-verouillage"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Verrouillage</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>  Deconnexion</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </header> <!-- ========== Left Sidebar Start ========== -->
+

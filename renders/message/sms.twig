@@ -1,0 +1,67 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Chat</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Chat</a></li>
+                                    <li class="breadcrumb-item active">SMS</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row justify-content-center mt-lg-5">
+                    <div class="col-xl-5 col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10">
+                                            <h4 class="mt-4 font-weight-semibold">Envoi de SMS</h4>
+                                            <p class="text-muted mt-3">Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis perferendis asperiores repellat.</p>
+
+                                            <div class="mt-4">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verificationModal">
+                                                    Simple message
+                                                </button>
+
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verificationModal2">
+                                                    message groupé
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                {% include('message/single.twig') %}
+                {% include('message/multiple.twig') %}
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+
+    </div>
+{% endblock %}

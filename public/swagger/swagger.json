@@ -1,0 +1,53 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Imperial technology API",
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "http://www.imperial-global.com/api/v1",
+            "description": "Imperial technology API"
+        }
+    ],
+    "paths": {
+        "/api/v1/{clientID}/{access-token}/portfolio/index": {
+            "get": {
+                "operationId": "Api\\Controller\\v1\\portfolio\\PorfolioAPIController::index",
+                "parameters": [
+                    {
+                        "name": "clientID",
+                        "in": "query",
+                        "description": "Client ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access-token",
+                        "in": "query",
+                        "description": "Jeton d'accès",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "contenu de la partie Acceuil ou home du portfolio",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "vos titres",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

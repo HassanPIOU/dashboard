@@ -1,0 +1,31 @@
+<div class="modal fade bs-example-modal-xl" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Creation du réseau social</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Réseau" id="reseau">
+                    </div>
+                    <div class="col-lg-12 mt-2">
+                        <input type="text" class="form-control" placeholder="Identifiant" id="identifiant">
+                    </div>
+                    <div class="col-lg-12 mt-2">
+                        <input type="text" class="form-control" placeholder="Mot de passe" id="password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" value="1" id="typevalue">
+                <input type="hidden" value="0" id="idreseau">
+                <button type="button" class="btn btn-secondary" id="createsocial_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="createsocial" onclick="createsocial($('#typevalue').val(),$('#idreseau').val())">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

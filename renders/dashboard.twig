@@ -1,0 +1,274 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card overflow-hidden">
+                            <div class="bg-soft-primary">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="text-primary p-3">
+                                            <h5 class="text-primary">Bon retour !</h5>
+                                            <p>Impérial technology</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 align-self-end">
+                                        <img src="/assets/images/profile-img.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="avatar-md profile-user-wid mb-4">
+                                            <img src="/uploads/users/{{ auth().avatar }}" alt="" class="img-thumbnail rounded-circle">
+                                        </div>
+                                        <h5 class="font-size-14 text-truncate"><strong>{{ auth().firstname }} {{ auth().lastname }}</strong></h5>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="pt-4">
+                                            <div class="row">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="text-muted mb-0 ml-3 text-truncate">{{ auth().poste }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Partenaires</p>
+                                                <h4 class="mb-0">{{ partenairecount }}</h4>
+                                            </div>
+
+                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Clients</p>
+                                                <h4 class="mb-0">{{ customers }}</h4>
+                                            </div>
+
+                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bx-archive-in font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Projets</p>
+                                                <h4 class="mb-0">{{ projets }}</h4>
+                                            </div>
+
+                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Utilisateurs</p>
+                                                <h4 class="mb-0">{{ usercount }}</h4>
+                                            </div>
+
+                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="mdi mdi-walk font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Credit SMS</p>
+                                                <h4 class="mb-0"><div id="smsaccountbalance"></div></h4>
+                                            </div>
+
+                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bxs-envelope font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Revenue</p>
+                                                <h4 class="mb-0">0</h4>
+                                            </div>
+
+                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bx-money font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-xl-4" >
+                        <div class="card" style="height: 390px !important;">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Réseaux sociaux</h4>
+                                <div class="text-center">
+                                    <div class="avatar-sm mx-auto mb-4">
+                                                <span class="avatar-title rounded-circle bg-soft-danger font-size-24">
+                                                        <i class="mdi mdi-heart text-danger"></i>
+                                                    </span>
+                                    </div>
+                                    <p class="font-16 text-muted mb-2"></p>
+                                    <h5><a href="#" class="text-dark">Likes</a></h5>
+                                    <p class="text-muted">Nombre de like de notre page Facebook, followers sur Twitter , d'abonné sur Instagram.</p>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-6">
+                                        <div class="social-source text-center mt-3">
+                                            <div class="avatar-xs mx-auto mb-3">
+                                                        <span class="avatar-title rounded-circle bg-primary font-size-16">
+                                                                <i class="mdi mdi-facebook text-white"></i>
+                                                            </span>
+                                            </div>
+                                            <h5 class="font-size-15">Facebook</h5>
+                                            <p class="text-muted mb-0"><span id="facebook_like"></span> Likes</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="social-source text-center mt-3">
+                                            <div class="avatar-xs mx-auto mb-3">
+                                                        <span class="avatar-title rounded-circle bg-info font-size-16">
+                                                                <i class="mdi mdi-twitter text-white"></i>
+                                                            </span>
+                                            </div>
+                                            <h5 class="font-size-15">Twitter</h5>
+                                            <p class="text-muted mb-0">{{ twitterfollowers }} Followers</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="card" style="height: 390px !important;">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Projets Analytics</h4>
+
+                                <div>
+                                    <textarea name="" id="donutchartvalue" style="display: none;">{{ data|json_encode() }}</textarea>
+                                    <div id="donut-chart" class="apex-charts"></div>
+                                </div>
+
+                                <div class="text-center text-muted">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-secondary mr-1"></i>Attente</p>
+                                                <h5> {{ waiting }}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-info mr-1"></i>En cours</p>
+                                                <h5>{{ onprocessing }}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mt-2">
+                                                <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-success mr-1"></i>Terminer</p>
+                                                <h5> {{ completed }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+
+{% endblock %}

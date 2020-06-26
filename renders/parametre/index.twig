@@ -1,0 +1,351 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Parametres</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Parametres</a></li>
+                                    <li class="breadcrumb-item active">Parametres</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                              <div class="row">
+                                  <div class="col-lg-10">
+                                      <h4> Information</h4>
+                                  </div>
+                                  <div class="col-lg-2">
+                                      <button class="btn btn-success btn-sm btn-block" id="addInformation" onclick="addInformation()">Valider</button>
+                                  </div>
+                              </div>
+                                <hr>
+                                <div class="row">
+                                   <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-lg-6 mt-2">
+                                            <label for="">Nom</label>
+                                            <input type="text" class="form-control" id="info_name" value="{{ business().name }}">
+                                        </div>
+                                        <div class="col-lg-6 mt-2">
+                                            <label for="">Email</label>
+                                            <input type="text"  class="form-control" id="info_email" value="{{ business().email }}">
+                                        </div>
+                                        <div class="col-lg-6 mt-2">
+                                            <label for="">Adresse</label>
+                                            <input type="text" class="form-control" id="info_address" value="{{ business().adresse }}">
+                                        </div>
+                                        <div class="col-lg-6 mt-2">
+                                            <label for="">Numéro</label>
+                                            <input type="text" class="form-control" id="info_telephone" value="{{ business().telephone }}">
+                                        </div>
+                                    </div>
+                                   </div>
+                                    <div class="col-lg-4">
+                                        <label for="">Description</label>
+                                        <textarea name="" class="form-control" id="info_description" cols="30" rows="5">{{ business().description }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Methode de paiement</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Modalité de paiement</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                            <span class="d-none d-sm-block">Devise Accepter</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content p-3 text-muted">
+                                    <div class="tab-pane active" id="home" role="tabpanel">
+                                        <div class="row">
+
+                                            <div class="col-lg-6" id="addmethodpanel" >
+                                                <div class="row mb-2">
+                                                   <div class="col-lg-12 mb-2">
+                                                       <label for="modality_title">Désignation</label>
+                                                       <input type="text" id="method_title" class="form-control">
+                                                   </div>
+
+                                                    <div class="col-lg-12 mb-2">
+                                                        <label for="modality_file">Fichier</label>
+                                                        <input type="file" id="method_file"  accept="image/*"  class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-2 mt-2">
+                                                      <button class="btn btn-success btn-sm" id="addmethod" onclick="addmethod()">ajouter</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mt-2" id="methodlistpanel">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <table class="table table-nowrap table-centered mb-0" id="methodtable">
+                                                            <tbody id="bodymethod">
+                                                            {% for method in methods %}
+                                                            <tr class="trmethod">
+                                                                <td>
+                                                                    <div class="team">
+                                                                        <a href="javascript: void(0);" class="team-member">
+                                                                            <img src="/uploads/methods/{{ method.cover }}" class=m-1" alt="" style="width: 25px;">
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 class="text-truncate font-size-14 m-0"><b class="text-primary"><small>{{ method.name }}</small></b></h5>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-center">
+                                                                        {% if method.status == 1 %}
+                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Actif</span>
+                                                                        {% endif %}
+                                                                        {% if method.status == 2 %}
+                                                                            <span class="badge badge-pill badge-soft-danger font-size-11">Inactif</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </td>
+                                                                <td style="width: 5%;">
+                                                                        {% if method.status == 1 %}
+                                                                            <a href="javascript:void(0)"  onclick="methodAction({{ method.id_method }},2)"><i class="mdi mdi-close text-danger"></i></a>
+                                                                        {% endif %}
+                                                                        {% if method.status == 2 %}
+                                                                            <a href="javascript:void(0)"  onclick="methodAction({{ method.id_method }},1)"><i class="bx bx-check text-success"></i></a>
+                                                                        {% endif %}
+                                                                    <a href="javascript:void(0)" onclick="methodAction({{ method.id_method }},3)"><i class="bx bx-trash text-danger"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="profile" role="tabpanel">
+                                        <div class="col-lg-12" >
+                                            <div class="row mb-2">
+                                                  <div class="col-lg-12">
+                                                      <table class="table table-nowrap table-centered mb-0" id="modalitytable">
+                                                          <tbody id="bodymodality">
+                                                          {% for modality in modalities %}
+                                                              <tr class="trmodality">
+                                                                  <td>
+                                                                      <h5 class="text-truncate font-size-14 m-0"><b class="text-primary"><small>{{ modality.titre }}</small></b></h5>
+                                                                  </td>
+                                                                  <td>
+                                                                      <div class="text-center">
+                                                                          {% if modality.status == 1 %}
+                                                                              <span class="badge badge-pill badge-soft-success font-size-11">Actif</span>
+                                                                          {% endif %}
+                                                                          {% if modality.status == 2 %}
+                                                                              <span class="badge badge-pill badge-soft-danger font-size-11">Inactif</span>
+                                                                          {% endif %}
+                                                                      </div>
+                                                                  </td>
+                                                                  <td style="width: 5%;">
+                                                                      {% if modality.status == 1 %}
+                                                                          <a href="javascript:void(0)"  onclick="modalityAction({{ modality.modal_id }},2)"><i class="mdi mdi-close text-danger"></i></a>
+                                                                      {% endif %}
+                                                                      {% if modality.status == 2 %}
+                                                                          <a href="javascript:void(0)"  onclick="modalityAction({{ modality.modal_id }},1)"><i class="bx bx-check text-success"></i></a>
+                                                                      {% endif %}
+                                                                  </td>
+                                                              </tr>
+                                                          {% endfor %}
+                                                          </tbody>
+                                                      </table>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="settings" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-lg-6 mt-2">
+                                                <div class="row">
+                                                    <div class="col-lg-12 mt-2">
+                                                        <label for="">Devise</label>
+                                                        <input type="text" class="form-control" placeholder="Devise" id="devisename">
+                                                    </div>
+                                                    <div class="col-lg-12 mt-2" >
+                                                        <label for="">Code</label>
+                                                        <input type="text" class="form-control" placeholder="Code" id="devisecode">
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <button class="btn btn-success btn-sm mt-4" onclick="adddevise()" id="btnadddevise">Ajouter</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mt-4" id="devisepanel">
+                                                <table class="table table-nowrap table-centered mb-0" id="devisetable">
+                                                    <tbody id="bodydevise">
+                                                    {% for devise in devises %}
+                                                        <tr class="trdevise">
+                                                            <td>
+                                                              {{ devise.name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ devise.code }}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    {% if devise.status == 1 %}
+                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Actif</span>
+                                                                    {% endif %}
+                                                                    {% if devise.status == 2 %}
+                                                                        <span class="badge badge-pill badge-soft-danger font-size-11">Inactif</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </td>
+                                                            <td style="width: 5%;">
+                                                                {% if devise.status == 1 %}
+                                                                    <a href="javascript:void(0)"  onclick="deviseAction({{ devise.id }},2)"><i class="mdi mdi-close text-danger"></i></a>
+                                                                {% endif %}
+                                                                {% if devise.status == 2 %}
+                                                                    <a href="javascript:void(0)"  onclick="deviseAction({{ devise.id }},1)"><i class="bx bx-check text-success"></i></a>
+                                                                {% endif %}
+                                                                <a href="javascript:void(0)" onclick="deviseAction({{ devise.id }},3)"><i class="bx bx-trash text-danger"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    {% include('parametre/_addapi.twig') %}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card" style="height: 300px;">
+                <div class="card-body">
+                    <h4>Logo</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form action="/params-logo-add"  method="post" class="dropzone" >
+                                <div class="fallback">
+                                    <input id="logo" value="{{ business().logo }}"  name="file" type="file"  />
+                                </div>
+
+                                <div class="dz-message needsclick">
+                                    <div class="mb-3">
+                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                    </div>
+
+                                    <h4>Glisser deposer</h4>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card" style="height: 300px;">
+                <div class="card-body" id="apipanelbox">
+                <div class="card-title"> <div class="row">
+                        <div class="col-lg-9">
+                            Activation & désactivation des APIs
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#" data-toggle="modal" data-target="#verificationModal2"><i class="mdi mdi-plus pull-right"   style="cursor: pointer;"></i> <small>Ajouter</small></a>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row mt-4" id="apipanel">
+                        {% for api in apis %}
+                     <div class="col-lg-4 p-4 cardApi">
+                      <div class="row">
+                          <div class="col-lg-11">
+                              <div class="custom-control custom-switch mb-2" dir="ltr">
+                                  <input type="checkbox" class="custom-control-input" id="api_{{ api.id }}" onclick="changeapistate(this,'{{ api.id }}')"  {% if api.status == 1 %} checked {% endif %}>
+                                  <label class="custom-control-label" for="api_{{ api.id }}">{{ api.name }}</label>
+                              </div>
+                          </div>
+                          <div class="col-lg-1">
+                              <img src="/assets/images/loading.gif" id="load_{{ api.id }}"  style="width: 15px;height: 15px;display: none;" alt="">
+                          </div>
+                      </div>
+                     </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="ccard-body">
+                                <h4>Termes et conditions</h4>
+                                <hr>
+                                <div class="col-lg-12 mb-3">
+                                    <textarea name="" id="info_terms" cols="30" rows="5" class="form-control">{{ business().terme }}</textarea>
+                                    <button class="mt-2 btn btn-success btn-sm" id="addTerms" onclick="addTerms()">Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+{% endblock %}

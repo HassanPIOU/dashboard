@@ -1,0 +1,183 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('invoice/_additem.twig') }}
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Detail</h4>
+                            <div class="float-right">
+                                <a href="#" class="btn btn-info btn-sm  waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center">+ Item</a>
+                                <a href="javascript:window.print()" class="btn btn-info btn-sm  waves-effect waves-light"><i class="mdi mdi-printer"></i></a>
+                            </div>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Facture</a></li>
+                                    <li class="breadcrumb-item">Detail</li>
+                                    <li class="breadcrumb-item active"><b>#{{ invoice.reference }}</b></li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="mb-4">
+                                        <img src="/uploads/logo/{{ business().logo }}" alt="logo" height="60"/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <address>
+                                            <h3>{{ business().name }}</h3> <br>
+                                            <i class="bx bx-envelope"></i> {{ business().email }}<br>
+                                            <i class="bx bx-map-pin"></i> {{ business().adresse }}<br>
+                                            <i class="bx bx-phone-call"></i> {{ business().telephone }}<br>
+                                        </address>
+                                    </div>
+                                    <div class="col-lg-6 text-sm-right">
+
+                                    </div>
+                                </div>
+                                <div class="row mt-5" >
+                                    <div class="col-sm-6">
+                                        <address class="mt-2 mt-sm-0">
+                                            <div  style="margin-top: 5px;font-weight: bold">Expédiés à:</div><br>
+                                            <i class="bx bx-user"></i> {{ invoice.denomination }}<br>
+                                            <i class="bx bx-envelope"></i> {{ invoice.email }}<br>
+                                            <i class="bx bx-map-pin"></i> {{ invoice.address }} {{ invoice.city }} - {{ invoice.country }}<br>
+                                        </address>
+                                    </div>
+                                    <div class="col-sm-6 mt-3 ">
+                                        <div class="row">
+                                            <div class="offset-4 col-lg-4 text-sm-left">
+                                                    <div  style="margin-top: 5px;font-weight: bold">Facture </div>
+                                                    <div  style="margin-top: 5px;font-weight: bold">Date </div>
+                                                    <div  style="margin-top: 5px;font-weight: bold">Total </div>
+                                            </div>
+                                            <div class="col-lg-4 text-sm-right">
+                                                    <div style="margin-top: 5px;font-weight: bold">#{{ invoice.reference }}</div>
+                                                  <div  style="margin-top: 5px;">  {{ invoice.duedate | date('d M, Y') }}</div>
+                                                    <div id="firsttotal" style="margin-top: 5px;font-weight: bold"  onclick="setTotal('{{ total }}')"></div><br><br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="py-2 mt-lg-5">
+                                    <h3 class="font-size-15 font-weight-bold">Récapitulatif de la commande</h3>
+                                </div>
+                                <div class="table-responsive mt-5">
+                                    <table class="table table-nowrap" id="invtable">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 70px;">No.</th>
+                                            <th style="width: 70%;">Article</th>
+                                            <th  style="width: 10%;">Quantité</th>
+                                            <th style="width: 10%;" class="text-right">Prix</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="invtablebody">
+                                        {% for key, item in items  %}
+                                        <tr style="height: 50px;">
+                                            <td>#</td>
+                                            <td>
+                                                <div class="row">
+                                                    {{ item.item_name }} <br>
+                                                    <div class="col-lg-12">
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ item.item_qty }}</td>
+                                            <td class="text-right">
+                                                <input type="hidden" id="setdevide" value="{{ devise(item.item_devise) }}">
+                                                {{ item.item_price }} <small><sub> {{ devise(item.item_devise) }}</sub></small> </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                        <tr>
+
+                                            <td colspan="3" class="text-right">Sub Total</td>
+                                            <td class="text-right"><b  id="subtotalitemo"  onclick="setSubtotal('{{ subtotal }}')"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="border-0 text-right">
+                                                <strong>livraison</strong></td>
+                                            <td class="border-0 text-right"><b id="shipping" onclick="setShippingprice('{{ invoice.livraison }}')"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="border-0 text-right">
+                                                <div style="padding-right: 30px;color: #000;font-weight: bold;padding-top: 5px;" >Total</div></td>
+                                            <td class="border-0 text-right"><b class="m-0" id="secondtotal" onclick="setTotal('{{ total }}')"></b></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="row mt-lg-5">
+                                    <div class="col-lg-3">
+                                        <h2>
+                                            Merci <br> pour votre confiance
+                                        </h2>
+                                    </div>
+                                    <div class="offset-6 col-lg-3 text-sm-right">
+                                        <h3 style="font-family: 'Segoe Print';padding-right: 30px;">
+                                            {{ auth().lastname }} {{ auth().firstname }}
+                                        </h3>
+                                        <hr>
+                                       <div class="row">
+                                               <div class="col-lg-12" style="text-align: right;padding-right: 30px;">
+                                                  <strong> {{ auth().lastname }} {{ auth().firstname }}</strong>
+                                               </div>
+                                               <div class="col-lg-12"  style="text-align: right;padding-right: 30px;">
+                                                   {{ auth().poste }}
+                                               </div>
+                                       </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mt-5">
+                                <div class="row ml-1">
+                                    <h4>Termes et Conditions</h4>
+                                </div>
+                                <div class="row overflow-hidden ml-3" >
+                                    <div class="col-lg-12" style="overflow-x: hidden !important;">
+                                        {{ business().terme }}
+                                    </div>
+                                </div>
+                                <hr class="mt-5">
+                                <div class="row">
+                                    <div class="mb-4">
+                                        <img src="/uploads/logo/{{ business().logo }}" alt="logo" height="20"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+
+{% endblock %}

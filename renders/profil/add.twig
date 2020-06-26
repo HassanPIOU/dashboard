@@ -1,0 +1,96 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Profil</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Profil</a></li>
+                                    <li class="breadcrumb-item active">Ajouter</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Ajouter un profil</h4>
+                               <div class="row">
+                                   <div class="col-lg-12">
+                                     <div class="row">
+                                         <div class="col-lg-12">
+                                             <label for="nomprofil">Nom</label>
+                                             <input type="text" id="nomprofil" class="form-control" placeholder="Nom du profil">
+                                         </div>
+                                         <div class="col-lg-12 mt-4">
+                                             <label for="descriptionprofil">Description</label>
+                                             <textarea name="" id="descriptionprofil" cols="30" rows="3" class="form-control" placeholder="..."></textarea>
+                                         </div>
+                                     </div>
+                                   </div>
+                                   <h4 class="mt-3">Options</h4>
+                                   <div class="col-lg-12 mt-5">
+                                       <div class="row" style="padding-left: 30px;">
+                                           <div class="col-lg-3">
+                                               <div class="custom-control custom-switch mb-2" dir="ltr">
+                                                   <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                                   <label class="custom-control-label" for="customSwitch1">Chat</label>
+                                               </div>
+                                           </div>
+                                           <div class="col-lg-3">
+                                               <div class="custom-control custom-switch mb-2" dir="ltr">
+                                                   <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                                   <label class="custom-control-label" for="customSwitch2">Apps</label>
+                                               </div>
+
+                                           </div>
+                                           <div class="col-lg-3">
+                                               <div class="custom-control custom-switch mb-2" dir="ltr">
+                                                   <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                                                   <label class="custom-control-label" for="customSwitch3">Utils</label>
+                                               </div>
+                                           </div>
+                                           <div class="col-lg-3">
+                                               <div class="custom-control custom-switch mb-2" dir="ltr">
+                                                   <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                                   <label class="custom-control-label" for="customSwitch4">Administration</label>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <br>
+                                       <hr>
+
+                                   </div>
+                               </div>
+                                <div class="row mt-4 ">
+                                    <div class="offset-5 col-lg-2">
+                                        <button class="btn btn-success btn-block" id="submitprofil">Ajouter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+{% endblock %}

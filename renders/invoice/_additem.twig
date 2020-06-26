@@ -1,0 +1,57 @@
+<div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0">Produit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="itemName" placeholder="Article">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 mt-3">
+                     <div class="row">
+                         <div class="col-lg-8">
+                             <div class="input-group">
+                                 <input type="hidden" value="{{ invoice.hash_key }}" id="invhash">
+                                 <input type="number" onkeyup="onpriceChange()" class="form-control" id="priceitem" placeholder="Prix">
+                             </div>
+                         </div>
+                         <div class="col-lg-4">
+                             <select name="" id="deviseitem" class="form-control" onchange ="onpriceChange()">
+                                 <option  selected disabled>Devise</option>
+                                 {% for devise in devises %}
+                                 <option value="{{ devise.code }}">{{ devise.name }}</option>
+                                 {% endfor %}
+                             </select>
+                         </div>
+                     </div>
+                    </div>
+
+                    <div class="col-lg-12 mt-3">
+                        <div class="input-group">
+                            <input type="number" onkeyup="onpriceChange()" class="form-control" id="itemQte" placeholder="Quantité">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                       <div class="col-lg-12">
+                          <div class="col-lg-12">
+                              <p><b>Sub Total :</b> <b id="subtotalitem">0</b></p>
+                          </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addcinvitem_dismiss" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addinvitem" onclick="addinvitem()">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Server</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Utils</a></li>
+                                    <li class="breadcrumb-item active">Server</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                {% include('utils/_bd.twig') %}
+                {% include('utils/_ftp.twig') %}
+                {% include('utils/_addserver.twig') %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <a href="" class="offset-11 mb-4 btn btn-info btn-rounded pull-right col-1" data-toggle="modal" data-target=".exampleModaladd">Ajouter</a>
+                                </div>
+                                <table id="datatable" class="table table-striped" >
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom de domaine</th>
+                                        <th>Propriétaire</th>
+                                        <th>Date d'achat</th>
+                                        <th>Abonnement</th>
+                                        <th>Date d'echeance</th>
+                                        <th>FTP</th>
+                                        <th>Database</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="body">
+                                    {% for server in servers %}
+                                        <tr>
+                                            <td><b>#</b></td>
+                                            <td>{{ server.domaine }}</td>
+                                            <td>{{ server.denomination }}</td>
+                                            <td>{{ server.buy_date | date('d M, Y') }}</td>
+                                            <td>{{ server.abonnement }} an (s)</td>
+                                            <td>{{ server.dead_date | date('d M, Y')  }}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="showftp('{{ server.ftp_id }}')" class="btn btn-primary btn-sm btn-rounded font-size-10" data-toggle="modal" data-target=".exampleModal">voir</a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="showdb('{{ server.bd_id }}')" class="btn btn-primary btn-sm btn-rounded font-size-10" data-toggle="modal" data-target=".exampleModal2">voir</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" onclick="deleteserver('{{ server.ftp_id }}')"><i class="bx bx-trash text-danger"></i></a>
+                                            </td>
+                                        </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

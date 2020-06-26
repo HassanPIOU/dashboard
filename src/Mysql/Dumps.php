@@ -1,0 +1,88 @@
+<?php
+
+
+namespace Akuren\Mysql;
+
+
+use AkConfig\config\Config;
+use Akuren\Mysql\Ifsnop\Mysqldump\Mysqldump;
+
+
+class Dumps implements DumpsInterface
+{
+
+
+    private $database;
+
+
+    private $filename;
+
+    private  $myRoot ;
+
+
+
+    public static function data(string $database)
+    {
+        return (new Dumps())->database($database);
+    }
+
+    /**
+     * @return Mysqldump
+     * @throws \Exception
+     */
+    public function start ()
+    {
+       try{
+           $dump =  new Mysqldump("mysql:host=".Config::DB_HOST.";dbname=".$this->database, Config::DB_USER, Config::DB_PASS);
+           return $dump;
+       }catch (\Exception $exception){
+           throw new \Exception('Database Connection not set');
+       }
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function dump ()
+    {
+         return   $this->start()->start($this->setMyRoot().'/'.$this->filename);
+    }
+
+
+
+    /**
+     * @param string $DB
+     * @return $this|mixed
+     */
+    public function database (string $DB)
+    {
+        $this->database = $DB;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function filename (string $name)
+    {
+        $this->filename =  $name.".sql";
+
+        return $this;
+    }
+
+    /**
+     */
+    private function setMyRoot ()
+    {
+        $this->myRoot = __DIR__."/../../public/dumps";
+        if (!file_exists($this->myRoot)){
+            mkdir($this->myRoot, 777, true);
+        }
+        return $this->myRoot;
+    }
+
+
+}

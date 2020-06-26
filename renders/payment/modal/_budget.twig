@@ -1,0 +1,61 @@
+<div class="modal fade budget-example-modal-xl"  tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Ajout Budget</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6 mt-2">
+                        <label for="amount_budget">Montant</label>
+                        <input type="text" class="form-control" id="amount_budget" placeholder="Montant">
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                        <label for="projet_budget">Projet</label>
+                        <select name="" id="projet_budget" class="form-control" onchange="projetselectforbudget(this.value)">
+                            <option selected disabled>Selectionnez le projet</option>
+                          <optgroup label="projets">
+                              {% for projet in projets %}
+                                  <option value="{{ projet.id }}">{{ projet.name }}</option>
+                              {% endfor %}
+                          </optgroup>
+                            <optgroup label="Autres">
+                                <option value="0">Autre</option>
+                                <option value="-1">Ajouter un projet</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 mt-2" style="display: none;" id="otherprojetpanel">
+                        <label for="other_projet_budget">Autre projet</label>
+                        <input type="text" class="form-control"   placeholder="Définir autre projet"  id="other_projet_budget">
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                        <label for="take_date_budget">Date du retrait</label>
+                        <input class="form-control" type="date"  id="take_date_budget">
+                    </div>
+                    <div class="col-lg-6"  >
+                        <label for="account_budget">Compte de retrait</label>
+                        <select class="form-control " id="account_budget" name="account_budget">
+                            <option selected disabled>compte</option>
+                            {% for compte in comptes %}
+                                <option value="{{ compte.id }}">{{ compte.denomination }} <small>({{ compte.numero }})</small></option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-12 mt-2">
+                        <label for="description_budget">Description</label>
+                        <textarea name="" id="description_budget" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addbudget_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" id="addbudget" onclick="addbudget()">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

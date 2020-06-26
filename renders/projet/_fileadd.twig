@@ -1,0 +1,30 @@
+<div class="modal fade file-example-modal-xl"  tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Ajout de fichier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                  <form action="/projet-file-add" id="addprojetfiles" method="post" class="dropzone">
+                     <input type="hidden" value="{{ projet.hash_key }}" name="hash">
+                      <input type="hidden" value="{{ projet.id }}" name="projet_id">
+                    <div class="fallback">
+                        <input id="projetaddfiles" name="file" type="file" multiple />
+                    </div>
+
+                    <div class="dz-message needsclick">
+                        <div class="mb-3">
+                            <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                        </div>
+
+                        <h4>Glisser deposer</h4>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

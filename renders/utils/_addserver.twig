@@ -1,0 +1,44 @@
+<div class="modal fade exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter information server</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="clientselect">Propriétaire</label>
+                        <select name="" id="clientselect"  class="form-control " >
+                            <option disabled selected>Choisir le propriétaire</option>
+                            {% for customer in customers %}
+                                <option value="{{ customer.id }}">{{ customer.denomination }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="domainename">Nom de domaine</label>
+                        <input type="text" id="domainename" class="form-control" placeholder="Nom de domaine">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-lg-6">
+                        <label for="buydate">Date d'achat</label>
+                        <input type="date"  id="buydate" class="form-control" placeholder="Date d'achat">
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="deaddate">Date d'échéance</label>
+                        <input type="date" id="deaddate" class="form-control" placeholder="Date d'échéance">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="modal fade about-example-modal-xl" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Modifier mes informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-2">
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.lastname  }}" placeholder="Nom" id="lastname"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.firstname  }}" placeholder="Prénom" id="firstname"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.experience  }}" placeholder="Expérience" id="experience"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.telephone  }}" placeholder="Téléphone" id="telephone"></div>
+                    <div class="col-lg-6 mt-2"><input type="email" class="form-control" value="{{ about.email  }}" placeholder="Email" id="email"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.address  }}" placeholder="Adresse" id="address"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.langue  }}" placeholder="Langues parlées" id="langue"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.skype  }}" placeholder="social : skype" id="skype"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.github  }}" placeholder="social : github" id="github"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.linkedin  }}" placeholder="social : linkedin" id="linkedin"></div>
+                    <div class="col-lg-6 mt-2"><input type="text" class="form-control" value="{{ about.xing  }}" placeholder="social : xing" id="xing"></div>
+                    <div class="col-lg-6 mt-2">
+                        <div class="custom-control custom-checkbox mt-2">
+                            <input type="checkbox" class="custom-control-input" value="1" id="freelance">
+                            <label class="custom-control-label" for="freelance">Freelance </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="updateUserInfo_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="updateUserInfo" onclick="updateUserInfo('{{ about.id_about }}')">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

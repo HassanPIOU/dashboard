@@ -1,0 +1,78 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Dump database</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Database </a></li>
+                                    <li class="breadcrumb-item active">Dump</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="text-sm-right">
+                                            <button type="button" id="dump_database" onclick="dumpdatabase()" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Sauvegarder</button>
+                                        </div>
+                                    </div><!-- end col-->
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="example1" class="table table-centered table-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>BDD</th>
+                                            <th>Sauvegarder par</th>
+                                            <th>Nbre de Téléchargement</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="body">
+                                        {% for data in bdd %}
+                                        <tr>
+                                           <td><i class="bx bx-data" style="font-size: 20px"></i></td>
+                                            <td>{{ data.user_fullname }}</td>
+                                            <td>{{ data.nbre_download }}</td>
+                                            <td>{{ data.created_at | date('d/m/Y') }}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" id="downloaddata" onclick="downloaddatabase('{{ data.hash_key }}')"><i class="mdi mdi-download font-size-16 text-success mr-1"></i></a>
+                                                <a href="javascript:void(0)" id="deletedata" onclick="deledatabase('{{ data.hash_key }}')"><i class="mdi mdi-trash-can font-size-16 text-danger mr-1"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

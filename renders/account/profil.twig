@@ -1,0 +1,203 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Profil</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
+                                    <li class="breadcrumb-item active">Profil</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                {% include('account/_accountupdate.twig') %}
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card overflow-hidden">
+                            <div class="bg-soft-primary">
+                                <div class="row">
+                                    <div class="col-7">
+                                    </div>
+                                    <div class="col-5 align-self-end">
+                                        <img src="assets/images/profile-img.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="avatar-md profile-user-wid mb-4">
+                                            <img id="profile_picture" src="/uploads/users/{{ auth().avatar  }}" alt="" class="img-thumbnail rounded-circle">
+                                            <label  for="photo" style="position: relative;top: -27px;left: 50px;color: #000; cursor: pointer;width: 25px;height: 25px;background:#ffffff;border: 1px solid #ccc;border-radius: 50%;padding: 5px;text-align: center;" id="changepicture"> <i class="bx bx-pen"></i></label>
+                                            <input id="photo" type="file" accept="image/*" onchange="uploadprofilpic(this)" name="photo" style="display: none">
+                                        </div>
+                                        <h5 class="font-size-15 text-truncate">{{ auth().lastname  }} {{ auth().firstname  }}</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Information <a href="" class="float-lg-right"  data-toggle="modal" data-target=".bs-example-modal-center"> <i class="bx bx-pencil"></i></a></h4>
+
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap mb-0">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Nom :</th>
+                                            <td>
+                                                {{ auth().lastname  }} {{ auth().firstname  }}
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Mobile :</th>
+                                            <td>{{ auth().telephone  }}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">E-mail :</th>
+                                            <td>{{ auth().email  }}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Adresse :</th>
+                                            <td>{{ auth().adresse  }}</td>
+                                            
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <!-- end card -->
+                    </div>
+
+                    <div class="col-xl-8">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Projets fini</p>
+                                                <h4 class="mb-0">{{ completed }}</h4>
+                                            </div>
+
+                                            <div class="mini-stat-icon avatar-sm align-self-center rounded-circle bg-primary">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-check-circle font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Projets en cours</p>
+                                                <h4 class="mb-0">{{ encours }}</h4>
+                                            </div>
+
+                                            <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-hourglass font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mini-stats-wid">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted font-weight-medium">Ma part financière</p>
+                                                <h4 class="mb-0">0</h4>
+                                            </div>
+
+                                            <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-package font-size-24"></i>
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">5 Derniers projets</h4>
+                                {% if projets.count == 0 %}
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10">
+                                            <h4 class="mt-4 font-weight-semibold">Liste de mes Projets</h4>
+                                            <p class="text-muted mt-3">La liste de mes Projets est vide</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if projets.count != 0 %}
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap table-hover mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Projects</th>
+                                            <th scope="col">Debut</th>
+                                            <th scope="col">Deadline</th>
+                                            <th scope="col">Budget</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                         {% for projet in projets.take(5) %}
+                                        <tr>
+                                            <th scope="row">#</th>
+                                            <td>{{ projet.name }}</td>
+                                            <td>{{ projet.start | date("d M, Y") }}</td>
+                                            <td>{{ projet.end | date("d M, Y") }}</td>
+                                            <td>{{ projet.budget}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+
+{% endblock %}

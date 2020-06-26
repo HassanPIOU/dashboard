@@ -1,0 +1,114 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Profil</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Profil</a></li>
+                                    <li class="breadcrumb-item active">Liste</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <table id="datatable" class="table table-striped" >
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>description</th>
+                                        <th>Chat</th>
+                                        <th>Apps</th>
+                                        <th>Utils</th>
+                                        <th>Admin</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                    {% for profil in profils %}
+                                    <tr>
+                                        <td>{{ profil.designation }}</td>
+                                        <td>{{ profil.description | slice(0,100) }}</td>
+                                        <td>
+                                            {% if profil.chat == 0 %}
+                                            <i class="mdi mdi-close font-size-15 center text-center text-danger"></i>
+                                            {% endif %}
+
+                                            {% if profil.chat == 1 %}
+                                                <i class="mdi mdi-check text-success font-size-15 center text-center"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if profil.app == 0 %}
+                                                <i class="mdi mdi-close font-size-15 center text-center text-danger"></i>
+                                            {% endif %}
+
+                                            {% if profil.app == 1 %}
+                                                <i class="mdi mdi-check text-success font-size-15 center text-center"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if profil.util == 0 %}
+                                                <i class="mdi mdi-close font-size-15 center text-center text-danger"></i>
+                                            {% endif %}
+
+                                            {% if profil.util == 1 %}
+                                                <i class="mdi mdi-check text-success font-size-15 center text-center"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if profil.admin == 0 %}
+                                                <i class="mdi mdi-close font-size-15 center text-center text-danger"></i>
+                                            {% endif %}
+
+                                            {% if profil.admin == 1 %}
+                                                <i class="mdi mdi-check text-success font-size-15 center text-center"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if profil.status == 2 %}
+                                                <a href="javascript:void(0)"  data-toggle="tooltip" id="validerbtn" onclick="actionprofil('{{ profil.id }}', 2)" data-placement="top" title="" data-original-title="Activer"><i class="mdi mdi-check font-size-16 text-success mr-1"></i></a>
+                                            {% endif %}
+                                            {% if profil.status == 1 %}
+                                                <a href="javascript:void(0)" data-toggle="tooltip" id="desactiverbtn" onclick="actionprofil('{{ profil.id }}', 1)" data-placement="top" title="" data-original-title="désactiver" ><i class="mdi mdi-close font-size-16 text-danger mr-1"></i></a>
+                                            {% endif %}
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="" data-original-title="Supprimer"><i class="mdi mdi-trash-can font-size-16 text-danger mr-1"></i></a>
+
+                                        </td>
+                                    </tr>
+                                     {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

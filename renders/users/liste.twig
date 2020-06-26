@@ -1,0 +1,100 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Utilisateurs</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Utilisateurs</a></li>
+                                    <li class="breadcrumb-item active">Liste</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                {% include('users/_add_users.twig') %}
+                {% include('users/_detail.twig') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="text-sm-right">
+                                            <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2" data-toggle="modal" data-target=".bs-example-modal-center"><i class="mdi mdi-plus mr-1"></i> Nouveau</button>
+                                        </div>
+                                    </div><!-- end col-->
+                                </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-centered table-nowrap table-hover" id="datatable">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Avatar</th>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Prénom(s)</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Téléphone</th>
+                                                <th scope="col">Poste</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="body">
+                                            {% for user in users %}
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <img class="rounded-circle avatar-xs" src="/uploads/users/{{ user.avatar }}" alt="">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ user.lastname }}</td>
+                                                    <td>{{ user.firstname }}</td>
+                                                    <td>{{ user.email }}</td>
+                                                    <td>{{ user.telephone }}</td>
+                                                    <td>{{ user.poste }}</td>
+                                                    <td>
+                                                        <ul class="list-inline font-size-14 contact-links mb-0">
+                                                            <li class="list-inline-item px-2">
+                                                                <a href="javascript:void(0)" onclick="getuserdetail('{{ user.hash_key }}')" data-toggle="modal" data-target=".detail-example-modal-center" ><i class="mdi mdi-eye text-info"></i></a>
+                                                            </li>
+                                                            {% if user.status== 1 %}
+                                                                <li class="list-inline-item px-2">
+                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Désactiver" onclick="userAction('{{ user.id}}','2')"><i class="mdi mdi-close text-danger"></i></a>
+                                                                </li>
+                                                            {% endif%}
+                                                            {% if user.status == 2 %}
+                                                                <li class="list-inline-item px-2">
+                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Activer" onclick="userAction('{{ user.id}}','1')"><i class="bx bx-check text-success"></i></a>
+                                                                </li>
+                                                            {% endif%}
+
+                                                            <li class="list-inline-item px-2">
+                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Supprimer" onclick="userAction('{{ user.id}}','3')"><i class="bx bx-trash text-danger"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

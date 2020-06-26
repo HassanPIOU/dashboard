@@ -1,0 +1,59 @@
+<div class="modal fade account-example-modal-xl"  tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Ajout compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <div class="row">
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountName">Nom</label>
+                         <input type="text" class="form-control " id="accountName" placeholder="Nom">
+                     </div>
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountDevise">Devise</label>
+                         <select name="" id="accountDevise" class=" form-control">
+                             <option value="0" selected disabled>Devise</option>
+                             {% for devise in devises %}
+                                 <option value="{{ devise.code }}">{{ devise.name }}</option>
+                             {% endfor %}
+                         </select>
+                     </div>
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountNumber ">Numéro de compte</label>
+                         <input type="text" class="form-control " id="accountNumber"  placeholder="Numéro de compte">
+                     </div>
+
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountStartBalance">Solde d'ouverture</label>
+                         <input type="text" class="form-control "  id="accountStartBalance" accountStartBalance placeholder="Solde d'ouverture">
+                     </div>
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountOpenDate">Date d'ouverture</label>
+                         <input type="date" class="form-control " id="accountOpenDate" placeholder="Date d'ouverture" >
+                     </div>
+                     <div class="col-lg-6 mt-2">
+                         <label for="accountRole">Type du compte</label>
+                         <select name="" id="accountRole" class="form-control ">
+                             <option disabled selected>Type du compte </option>
+                             <option value="Mobile">Mobile</option>
+                             <option value="Bank">Bank</option>
+                             <option value="Carte prépayé">Carte prépayé</option>
+                         </select>
+                     </div>
+                     <div class="col-lg-12 mt-2">
+                         <label for="accountRemarques">Remarques</label>
+                         <textarea name="" id="accountRemarques" cols="30" rows="3" class="form-control" placeholder="Remarques..."></textarea>
+                     </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addMoneyAcount_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" id="addMoneyAcount" onclick="addMoneyAcount()">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,43 @@
+<div class="modal fade bs-example-modal-xl" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Ajouter Une formation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="type_projet_projet" placeholder="Type de projet">
+                    </div>
+                    <div class="col-lg-6">
+                        <select name=""  class="form-control" id="customer_portfolio">
+                            <option disabled selected>Choisir le client</option>
+                            {% for customer in customers %}
+                                <option value="{{ customer.id }}">{{ customer.denomination }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <input type="text" class="form-control" id="duration_portfolio"  placeholder="Durée de travail en Jrs">
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <input type="text" class="form-control" id="technology_used_portfolio"  placeholder="Technologie utilisé">
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <input type="text" class="form-control" id="budget_portfolio"  placeholder="Budget">
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <input type="file" class="form-control" id="image_portfolio" >
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addportfolio_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="addportfolio" onclick="addportfolio()">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

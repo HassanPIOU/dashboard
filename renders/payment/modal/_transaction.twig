@@ -1,0 +1,68 @@
+<div class="modal fade transaction-example-modal-xl"  tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Ajout transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                  <div class="row">
+                      <div class="col-lg-6 mt-2">
+                          <label for="">Montant</label>
+                          <input type="text" class="form-control" id="amount_transaction">
+                      </div>
+                      <div class="col-lg-6 mt-2">
+                          <label for="">Destinataire</label>
+                          <select class="form-control " id="destinatiare_transaction" name="destinatiare_transaction">
+                              <option selected disabled>Destinataire</option>
+                              <option value="0">Imperial Technology</option>
+                              {% for customer in customers %}
+                                  <option value="{{ customer.id }}">{{ customer.denomination }}</option>
+                              {% endfor %}
+
+                          </select>
+                      </div>
+                      <div class="col-lg-12 mt-2">
+                          <label for="">Type de transaction</label>
+                          <select class="form-control" id="type_transaction" name="type">
+                              <option>Type</option>
+                              <option value="1">Paiement (sortant)</option>
+                              <option value="2">Paiement (entrant)</option>
+                          </select>
+                      </div>
+                      <div class="col-lg-6 mt-2">
+                          <label for="">Du Compte</label>
+                          <select class="form-control " id="from_account" name="from_account">
+                              <option selected disabled>Du compte</option>
+                              <option value="0">Compte Client</option>
+                              {% for compte in comptes %}
+                                  <option value="{{ compte.id }}">{{ compte.denomination }} <small>({{ compte.numero }})</small></option>
+                              {% endfor %}
+
+                          </select>
+                      </div>
+                      <div class="col-lg-6 mt-2">
+                          <label for="">Vers Compte</label>
+                          <select class="form-control " id="to_account" name="from_account">
+                              <option selected disabled>Vers compte</option>
+                              <option value="0">Compte Client</option>
+                              {% for compte in comptes %}
+                                  <option value="{{ compte.id }}">{{ compte.denomination }} <small>({{ compte.numero }})</small></option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                      <div class="col-lg-12 mt-2">
+                          <label for="">Description</label>
+                          <textarea name="" class="form-control" id="desc_transaction" cols="30" rows="3"></textarea>
+                      </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addMoneyTransaction_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" id="addMoneyTransaction" onclick="addMoneyTransaction()">valider</button>
+            </div>
+        </div>
+    </div>
+</div>

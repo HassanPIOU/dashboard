@@ -1,0 +1,79 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Social</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Réseaux</a></li>
+                                <li class="breadcrumb-item active">Sociaux</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+             {% include('social/_addsocial.twig') %}
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card" >
+                        <div class="card-body">
+                            <div class="row">
+                              <div class="offset-11 mb-4 col-lg-1">
+                                  <button class="btn btn-success btn-rounded  btn-sm float-lg-right" data-toggle="modal" data-target=".bs-example-modal-xl">Ajouter</button>
+                              </div>
+                            </div>
+                           <div class="row">
+                               <div class="table-responsive">
+                                   <table class="table table-centered table-nowrap" id="apidatatable">
+                                       <thead>
+                                       <tr>
+                                           <th><b>#</b></th>
+                                           <th>Reseau</th>
+                                           <th>Identifiant</th>
+                                           <th>Mot de passe</th>
+                                           <th>Action</th>
+                                       </tr>
+                                       </thead>
+                                       <tbody id="body">
+                                       {% for key, social in socials %}
+                                           <tr>
+                                               <td>{{ key + 1 }}</td>
+                                               <td>{{ social.reseau }}</td>
+                                               <td>{{  social.username  }}</td>
+                                               <td>{{  social.password }}</td>
+                                               <td>
+                                                    <a href="javascript:void(0)" onclick="updateSocial('{{ social.reseau }}','{{ social.username }}','{{ social.password }}','{{ social.id }}')"><i class="bx bx-pencil text-info"></i></a>
+                                                   <a href="javascript:void(0)" onclick="deleteSocial('{{ social.id }}')"><i class="bx bx-trash text-danger"></i></a>
+                                               </td>
+                                           </tr>
+                                       {% endfor %}
+                                       </tbody>
+                                   </table>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+</div>
+
+{% endblock %}

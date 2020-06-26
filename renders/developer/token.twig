@@ -1,0 +1,111 @@
+{% extends 'layouts/design.twig' %}
+
+
+{% block body %}
+<div class="main-content">
+    {% include('developer/_clientcreate.twig') %}
+    <div class="page-content">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-content-xl-center">
+                            <div class="col-lg-4">
+                                    <label for="clientIDdefault" id="clientIDdefaultlabel"
+                                            {% if  auth().clientID == NULL %}
+                                                style="display: none;"
+                                            {% endif %}
+                                    >Mon Client ID</label>
+
+                                <input type="text" id="clientIDdefault" class="form-control" value="{{ auth().clientID }}" readonly
+                                {% if  auth().clientID == NULL %}
+                                    style="display: none;"
+                                {% endif %}
+                                  >
+
+                                <button class="btn btn-info btn-sm"  id="generateclient"
+                                        {% if  auth().clientID != NULL %}
+                                        style=" display: none;"
+                                        {% endif %}
+                                        data-toggle="tooltip" data-placement="top" title="Cliquer pour générer votre client ID" onclick="generateclientID('{{ auth().hash_key }}')"  >Générer le Client ID</button>
+                            </div>
+                            <div class="col-lg-8">
+                                <br>
+                                <button class="createapibtn pull-right float-lg-right"
+                                        {% if  auth().clientID == NULL %}
+                                            style=" display: none;"
+                                        {% endif %}
+                                        data-toggle="modal" data-target=".bs-example-modal-center"><i class="bx bx-plus"></i> Créer un Jeton d'accès</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                           <div class="row">
+                          <div class="col-lg-4">
+                              <h3 class="pl-2 mt-4 ">Jeton d'accès</h3>
+                          </div>
+                               <div class="offset-7 col-lg-1">
+                                  <button class="btn btn-outline-success float-lg-right" id="copiefinal" style="display: none;"></button>
+                               </div>
+                            <div class="col-lg-12">
+                                <ul>
+                                    <li>Pour toutes appelles d'API, le client ID et le Jeton d'accès sont nécessaires</li>
+                                </ul>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="apidatatable" class="table dt-responsive nowrap"
+                                       style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom</th>
+                                        <th>Jeton</th>
+                                        <th>Application</th>
+                                         <th>Crée le</th>
+                                        <th style="width: 5%;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="body">
+                                    {% for token in tokens %}
+                                       <tr>
+                                           <td>#</td>
+                                           <td>{{ token.name_token }}</td>
+                                           <td><input  style="border: none;width: 530px;" readonly value="{{ token.token_key}}"  id="tok_{{ token.id_token }}" data-id="{{ token.id_token }}">
+                                                   <img  style="cursor: pointer;"  id="tokenfrom_{{ token.id_token }}" onclick="clipboardCop(this)"
+                                                         class="copyBtn btn btn-outline-dark btn-sm"
+                                                         data-toggle="tooltip"  data-placement="top" title="Copier dans le presse-papier"
+                                                          data-copytarget="#tok_{{ token.id_token }}" src="/assets/images/clippy.svg" alt="">
+                                              </td>
+                                           <td>{{ token.name }}</td>
+                                           <td>{{ token.created_at | date('d M,Y') }}</td>
+                                           <td>
+                                               <div>
+                                                   <i class="bx bx-pencil text-info"></i>
+                                                   <i class="bx bx-trash text-danger"></i>
+                                                   <i></i>
+                                               </div>
+                                           </td>
+                                       </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+{% endblock %}

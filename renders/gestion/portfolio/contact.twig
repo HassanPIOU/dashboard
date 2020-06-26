@@ -1,0 +1,115 @@
+{% extends 'layouts/design.twig' %}
+
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Messages</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Portfolio</a></li>
+                                    <li class="breadcrumb-item active">Contact</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% include('gestion/portfolio/modal/_message_read.twig') %}
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card" id="portfoliomessagecount">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <h3>{{ messages.count }}</h3>
+                                    <p>Messages</p>
+                                </div>
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-centered table-nowrap">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 30%">
+                                                <p class="mb-0"> Non Lu</p>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <p class="mb-0">{{ unread }}</p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div  id="messagecontentportfolio">
+
+                            {% if messages.count == 0 %}
+                               <div class="card">
+                                   <div class="card-body">
+                                       <div class="row justify-content-center">
+                                           <div class="col-lg-10">
+                                               <h4 class="mt-5 mb-2 font-weight-semibold">Liste des Messages</h4>
+                                               <p class="text-muted mt-4">La liste des messages est vide</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                            {% endif%}
+
+                              <div  id="message-list" >
+                                  <ul class="message-list list"style="background: #ddd">
+                                      {% for message in messages  |reverse %}
+                                          <li {{ message.readed == 0 ? "style=\"font-weight: bold;background: #fff;box-shadow: 0 2px 6px #eee\"" : ''}}
+                                                  class="pag"
+                                          >
+                                              <div
+                                                      onclick="seemessage('{{ message.id }}')" style="cursor: pointer;"
+                                                      data-toggle="modal" data-target=".bs-example-modal-xl" class="trcontact"
+                                              >
+                                                  <div class="col-mail col-mail-1">
+                                                      <div class="checkbox-wrapper-mail">
+                                                          <input type="checkbox"  id="chk19{{ message.id }}">
+                                                          <label for="chk19" class="toggle"></label>
+                                                      </div>
+
+                                                      {{ message.readed == 0 ?  '<b class="badge" style="background:#c0392b;color:#fff">Nouveau</b>' : ''}}
+                                                      <a href="#" class="title" style="margin-left: 20px;">{{ message.fullname }}</a>
+                                                  </div>
+                                              </div>
+
+                                              <div class="col-mail col-mail-2">
+                                                  <a href="#"
+                                                     onclick="seemessage('{{ message.id }}')" style="cursor: pointer;"
+                                                     data-toggle="modal" data-target=".bs-example-modal-xl"
+                                                     class="subject">{{ message.sujet }} – <span class="teaser">{{ message.message }}</span>
+                                                  </a>
+                                                  <div class="date">
+                                                      <div class="date"><a href="javascript:void(0);" onclick="deletemessageportfolio('{{ message.id }}')" class="far fa-trash-alt text-danger js-delete"></a></div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                      {% endfor %}
+                                  </ul>
+                                  <ul class="pagination"></ul>
+                              </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

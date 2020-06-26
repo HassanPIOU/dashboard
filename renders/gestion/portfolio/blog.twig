@@ -1,0 +1,94 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+        {% include('gestion/portfolio/modal/_addArticle.twig') %}
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Mon Blog</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Portfolio</a></li>
+                                    <li class="breadcrumb-item active">Blog</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card" >
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="offset-11 mb-4 col-lg-1">
+                                        <button class="btn btn-success btn-rounded  btn-sm float-lg-right" data-toggle="modal" data-target=".bs-example-modal-xl">Ajouter</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <table class="table table-centered table-nowrap" id="datatable">
+                                            <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Titre</th>
+                                                <th>Contenu</th>
+                                                <th>Tag</th>
+                                                <th>Slug</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="body">
+                                            {% for article in articles %}
+                                                <tr>
+                                                    <td><img class="img-thumbnail" style="width: 50px;" src="/uploads/portfolio/blog/{{ article.picture }}" alt=""></td>
+                                                    <td>{{ article.title }}</td>
+                                                    <td>{{ article.content | slice(0,30) }}...</td>
+                                                    <td>
+                                                        {% set tags = article.tag |split(';') %}
+                                                            {% for tag in tags  %}
+                                                                <b class="badge badge-success ml-1">{{ tag }}</b>
+                                                            {% endfor %}
+                                                    </td>
+                                                    <td>{{ article.slug }}</td>
+                                                    <td>
+                                                        {% if  article.status == 1%}
+                                                            <b class="badge badge-success">Public</b>
+                                                        {% endif %}
+
+                                                        {% if  article.status == 2%}
+                                                            <b class="badge badge-danger">privé</b>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if  article.status == 2%}
+                                                            <a href="javascript:void(0)" onclick="articleChange('{{ article.id }}', '1')"><i class="bx bx-check text-success"></i></a>
+                                                        {% endif %}
+                                                        {% if  article.status == 1 %}
+                                                            <a href="javascript:void(0)" onclick="articleChange('{{ article.id }}', '2')"><i class="mdi mdi-close text-danger"></i></a>
+                                                         {% endif %}
+                                                        <a href="javascript:void(0)" onclick="updateArticle('{{ article.id }}')"><i class="bx bx-pencil text-info"></i></a>
+                                                        <a href="javascript:void(0)" onclick="articleChange('{{ article.id }}','3')"><i class="bx bx-trash text-danger"></i></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

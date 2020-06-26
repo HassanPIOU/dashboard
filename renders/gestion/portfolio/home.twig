@@ -1,0 +1,77 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+        {% include('gestion/portfolio/modal/_addArticle.twig') %}
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Accueil</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Portfolio</a></li>
+                                    <li class="breadcrumb-item active">Accueil</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                       <div class="card">
+                           <div class="card-body">
+                               <h4 style="text-align: center;">Fond d'écran</h4>
+                               <form action="/portfolio-file-home"  method="post" class="dropzone">
+                                   <input type="hidden" value="{{ auth().id }}" name="userId">
+                                   <div class="fallback">
+                                       <input id="projetaddfiles" name="file" type="file"  />
+                                   </div>
+
+                                   <div class="dz-message needsclick">
+                                       <div class="mb-3">
+                                           <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                       </div>
+
+                                       <h4>Glisser deposer</h4>
+                                   </div>
+                               </form>
+                           </div>
+                       </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                       <div class="card">
+                           <div class="card-body">
+                               <h4 style="text-align: center;">Titres</h4>
+                               <div class="row">
+                                   <input type="text" class="form-control mt-3" id="title1" placeholder="Premier titre" value="{{ home.title1 }}">
+                                   <input type="text" class="form-control mt-4" id="title2" placeholder="Second titre" value="{{ home.title2 }}">
+                                   <input type="text" class="form-control mt-4" id="title3" placeholder="Troisième titre" value="{{ home.title3 }}">
+                                   <button class="btn btn-block btn-success mt-4 mb-1" id="validetitle" onclick="validetitle()">Valider</button>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 style="text-align: center;">Petite Description</h4>
+                                <textarea name="" id="descriptionHome" cols="30" rows="8" class="form-control" placeholder="Description......">{{ home.description }}</textarea>
+                                <button class="btn btn-block btn-success mt-4 mb-2" id="setDescription" onclick="setDescription()">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

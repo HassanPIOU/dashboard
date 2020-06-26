@@ -1,0 +1,247 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Detail</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Detail</a></li>
+                                    <li class="breadcrumb-item active">{{ projet.name }}</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-8" >
+                        <div class="card">
+                            <div class="card-body">
+                              <div class="row" >
+                                  <div class="col-lg-9">
+                                      <div class="media" >
+                                          <img src="assets/images/companies/img-1.png" alt="" class="avatar-sm mr-4">
+
+                                          <div class="media-body overflow-hidden">
+                                              <h5 class="text-truncate font-size-15">{{ projet.name }}</h5>
+                                              <p class="text-muted" id="mediabox">
+                                                  {% if projet.status == 1 %}
+                                                      <a href="javascript:void(0)" onclick="actionprojet('{{ projet.id }}',2)" class="badge badge-success" id="startprojetbtn" ><i class="mdi mdi-play font-size-16"></i></a>
+                                                  {% endif %}
+                                                  {% if projet.status == 2 %}
+                                                      <a href="javascript:void(0)" id="stopprojetbtn" onclick="actionprojet('{{ projet.id }}', 3)" class="badge badge-danger" ><i class="mdi mdi-stop font-size-16"></i></a>
+                                                  {% endif %}
+                                                  {% if projet.status == 3 %}
+                                                      <span class="badge badge-success">Terminer</span>
+                                                  {% endif %}
+                                              </p>
+                                          </div>
+                                      </div>
+
+                                      <h5 class="font-size-15 mt-4">Projet Details :</h5>
+
+                                      <p class="text-muted">{{ projet.description }}</p>
+
+                                      <div class="row task-dates">
+                                          <div class="col-sm-8 col-6">
+                                              <div class="mt-4" >
+                                                  <h5 class="font-size-14"><i class="bx bx-calendar mr-1 text-primary"></i> Date de début</h5>
+                                                  <p class="text-muted mb-0">{{ projet.start | date("d M, Y") }}</p>
+                                              </div>
+                                          </div>
+
+                                          <div class="col-sm-4 col-6">
+                                              <div class="mt-4">
+                                                  <h5 class="font-size-14"><i class="bx bx-calendar-check mr-1 text-primary"></i> Deadline</h5>
+                                                  <p class="text-muted mb-0">{{ projet.end | date("d M, Y") }}</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-3" id="countdownpart">
+                                      {% if projet.status == 2 %}
+                                          <div data-countdown="{{ projet.end | date("Y-m-d") }}" class="counter-number"></div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    {% include('projet/_modal.twig') %}
+                    {% include('projet/_task.twig') %}
+                    {% include('projet/_fileadd.twig') %}
+                    <div class="col-lg-4">
+                        <div class="card"  style="height: 255px;">
+                            <div class="card-body overflow-auto style-3">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <h4 class="card-title mb-4">Membres de l'equipe</h4>
+                                    </div>
+                                    <div class="col-lg-1">
+                                            <a href="#" class="btn btn-sm btn-info  pull-right"  onclick="projetmodal('{{ projet.id }}')" data-toggle="modal" data-target=".bs-example-modal-xl">ajouter</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-nowrap" id="example1">
+                                        <tbody id="bodytask">
+                                        {% for team in teams %}
+                                        <tr class="tasktr">
+                                            <td style="width: 50px;"><img src="/uploads/users/{{ team.avatar }}" class="rounded-circle avatar-xs" alt=""></td>
+                                            <td style="width: 80%;"><h5 class="font-size-14 m-0"><a href="#" class="text-dark text-capitalize">{{ team.username }}</a></h5></td>
+                                            <td>
+                                                {% for tag in tagcheck(projet.id,team.id) %}
+                                                    <a href="#" class="badge badge-primary font-size-11">{{ tag.task }} <b style="margin-left: 7px;" class="mdi mdi-close" onclick="deletetaskteam('{{ team.user_id }}','{{ tag.task }}')"></b></a>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                <div>
+                                                        <a href="javascript:void(0)" class="pull-right btn btn-success btn-sm"  data-toggle="modal" onclick="addids('{{ projet.id }}', '{{ team.user_id }}')" data-target=".second-example-modal-xl" title="" ><i class="mdi mdi-plus font-size-10"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                            {%if teams.count == 0 %}
+                                                <hr>
+                                               <p class="text-center" id="emptyteam">Liste vide</p>
+                                            {% endif %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body overflow-auto style-3" id="customercarddetail">
+                                <h4 class="card-title mb-4">Information du client</h4>
+                                <div class="table-responsive" >
+                                    {% if projet.customer != NULL %}
+                                    <table class="table table-nowrap mb-0" >
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Type :</th>
+                                            <td>{{ customer.structure_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Dénomination :</th>
+                                            <td>{{ customer.denomination }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Téléphone / Email :</th>
+                                            <td>
+                                                <p class="mb-1">{{ customer.telephone }}</p>
+                                                <p class="mb-0">{{ customer.email }}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Adresse :</th>
+                                            <td>{{ customer.address }} {{ customer.city }} - {{ customer.country }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Site web :</th>
+                                            <td><a href="{{ customer.siteweb }}" target="_blank">{{ customer.siteweb }}</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    {% endif %}
+
+                                    {% if projet.customer == NULL %}
+                                        <button class="btn btn-info btn-sm"  id="addcustomerbtntoshow" style="position: absolute;right: 20px;top: 20px;">Assigner</button>
+
+                                           <select name="" id="selectcustomertoprojet" onchange="addcustomertoprojet(this.value, '{{ projet.id }}')" class="form-control " style="position: absolute;top: 50%;left: 50%; width: 80%;transform: translate(-50%,-50%);display: none;">
+                                               <option disabled selected>Choisir le client</option>
+                                               {% for customer in customers %}
+                                                   <option value="{{ customer.id }}">{{ customer.denomination }}</option>
+                                               {% endfor %}
+                                           </select>
+
+                                        <br>
+                                        <img  src='/assets/images/loading.gif' id='loadimgcustomer' style='padding-left: 20px; width: 40px;position: absolute;top: 60%;left: 50%;transform: translate(-50%,-50%);display: none;' />
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" >
+                        <div class="card" style="height: 400px">
+                            <div class="card-body overflow-auto style-3">
+                                <div class="row mb-4">
+                                    <div class="col-lg-9">
+                                        <h4 class="card-title ">
+                                            Fichiers attachés
+                                        </h4>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a href="javascript:void(0)" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target=".file-example-modal-xl" >Ajouter</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive" style="">
+                                    <table class="table table-nowrap table-centered table-hover mb-0" id="example2">
+                                        <tbody id="bodyfiles">
+                                        {% for file in files %}
+                                        <tr class="trfiles">
+                                            <td style="width: 45px;">
+                                                <div class="avatar-sm">
+                                                                <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-24">
+                                                                    <i class="bx bxs-file-doc"></i>
+                                                                </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{ file.name }}</a></h5>
+                                                <small>Size : {{ sizeof(file.hash_key,file.name) }}</small>
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <a href="/uploads/{{ file.hash_key }}/{{ file.name }}" class="text-dark"><i class="bx bx-download h3 m-0"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {%if files.count == 0 %}
+                                            <hr>
+                                            <p class="text-center">Liste vide</p>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->
+
+
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+    </div>
+{% endblock %}

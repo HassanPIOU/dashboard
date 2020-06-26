@@ -1,0 +1,130 @@
+{% extends 'layouts/design.twig' %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Projet</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Projets</a></li>
+                                    <li class="breadcrumb-item active">Liste</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                {% include('projet/_modal.twig') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="">
+                            {% if projets.count != 0 %}
+                            <div class="table-responsive">
+                                <table id="example1" class="table project-list-table table-nowrap table-centered table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 100px">#</th>
+                                        <th scope="col">Projets</th>
+                                        <th scope="col">Deadline</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Equipe</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="bodylist">
+                                    {% for projet in projets %}
+                                    <tr>
+                                        <td><b>#</b></td>
+                                        <td>
+                                            <h5 class="text-truncate font-size-14"><a href="#" class="text-dark">{{ projet.name }}</a></h5>
+                                            <p class="text-muted mb-0">{{ projet.description | slice(0,45) }}...</p>
+                                        </td>
+                                        <td>{{ projet.end | date("d M, Y") }}</td>
+                                        <td>
+                                            {% if projet.status == 1 %}
+                                            <span class="badge badge-secondary">En attente</span>
+                                            {% endif %}
+                                            {% if projet.status == 2 %}
+                                                <span class="badge badge-info">En cours</span>
+                                            {% endif %}
+                                            {% if projet.status == 3 %}
+                                                <span class="badge badge-success">Terminer</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+
+                                            {% if teamfilter(projet.id).count > 0 %}
+                                            <div class="team">
+                                                {% for team in teamfilter(projet.id) %}
+                                                <a href="javascript: void(0);" class="team-member d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ teamuser(team.user_id).lastname }} {{ teamuser(team.user_id).firstname }}">
+                                                    <img src="/uploads/users/{{ teamuser(team.user_id).avatar }}" class="rounded-circle avatar-xs m-1" alt="">
+                                                </a>
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                            {% if teamfilter(projet.id).count == 0 %}
+                                                <a  href="#"  class="badge badge-light projetmodal"  onclick="projetmodal('{{ projet.id }}')"  data-toggle="modal"  data-target=".bs-example-modal-xl" >Ajouter</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="/projet-detail-{{ projet.hash_key }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Detail du projet"><i class="mdi mdi-eye-check font-size-16 text-success mr-1"></i></a>
+                                            {% if projet.status == 1 %}
+                                                <a href="javascript:void(0)"  data-toggle="tooltip" id="startprojetbtn" onclick="actionprojet('{{ projet.id }}', 2)" data-placement="top" title="" data-original-title="Démarrer"><i class="mdi mdi-play font-size-16 text-success mr-1"></i></a>
+                                            {% endif %}
+                                            {% if projet.status == 2 %}
+                                                <a href="javascript:void(0)" data-toggle="tooltip" id="stopprojetbtn" onclick="actionprojet('{{ projet.id }}', 3)" data-placement="top" title="" data-original-title="arreter" ><i class="mdi mdi-stop font-size-16 text-danger mr-1"></i></a>
+                                            {% endif %}
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="" data-original-title="Supprimer" onclick="deleteprojet('{{ projet.id }}')"><i class="mdi mdi-trash-can font-size-16 text-danger mr-1"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
+                            {% if projets.count == 0 %}
+                                <div class="row justify-content-center mt-lg-5">
+                                    <div class="col-xl-5 col-sm-8">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="text-center">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-lg-10">
+                                                            <h4 class="mt-4 font-weight-semibold">Liste des Projets</h4>
+                                                            <p class="text-muted mt-3">La liste des projets est vide</p>
+
+                                                            <div class="mt-4">
+                                                                <a href="/ajouter-projet"  class="btn btn-primary">
+                                                                    Ajouter
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+<div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Simple sms</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+                       <div class="col-lg-12">
+                           <input type="text" id="singlenumber" class="form-control" placeholder="ex : 22892328454">
+                       </div>
+                       <div class="col-lg-12 mt-2">
+                           <input type="text" id="singleheader" class="form-control" placeholder="header ex : imperial technology">
+                       </div>
+               </div>
+                <div class="row mt-3 mb-2">
+                       <div class="col-lg-12">
+                           <textarea id="singletextarea" class="form-control" maxlength="255" rows="3" placeholder="Votre message ici"></textarea>
+                       </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="pull-right">
+                            <button class="btn btn-success" id="sendsinglesms" onclick="singlesms()">Envoyer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

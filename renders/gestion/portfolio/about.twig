@@ -1,0 +1,275 @@
+{% extends 'layouts/design.twig' %}
+
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">A propos de moi</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Portfolio</a></li>
+                                    <li class="breadcrumb-item active">A propos</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" id="about_portfolio_about">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    About Me
+                                </div>
+                            <div class="offset-6 col-lg-2">
+                                {% if about.count != 0 %}
+                                    <button class="offset-6  btn btn-sm btn-success align-content-center"  data-toggle="modal" data-target=".about-example-modal-xl">Modifier</button>
+                                {% endif %}
+                            </div>
+                            </div>
+                            <hr>
+                            {% if about.count != 0 %}
+                         <div class="row">
+                             <div class="col-lg-3">
+                                 <label for="about_portfolio_pic" class="aboutpicchangebtn"><i class="bx bxs-pencil"></i></label>
+                                 <img src="/uploads/portfolio/about/{{ about.bg }}" alt="" id="aboutbgpic" style="width: 100%;">
+                                 <input type="file" id="about_portfolio_pic" onchange="uploadaboutpic(this)"  accept="image/*" style="display: none">
+                             </div>
+                               <div class="col-lg-4">
+                                   <div class="table-responsive">
+                                       <table class="table table-nowrap mb-0">
+                                           <tbody>
+                                           <tr>
+                                               <th scope="row">Nom :</th>
+                                               <td>
+                                                   {{ about.lastname  }}
+                                               </td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Prénom :</th>
+                                               <td>
+                                                   {{ about.firstname  }}
+                                               </td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Experience :</th>
+                                               <td>
+                                                   {{ about.experience }}
+                                               </td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Mobile :</th>
+                                               <td> {{ about.telephone }}</td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">E-mail :</th>
+                                               <td>{{ about.email  }}</td>
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Adresse :</th>
+                                               <td>{{ about.address  }}</td>
+
+                                           </tr>
+                                           </tbody>
+                                       </table>
+                                   </div>
+                               </div>
+                               <div class="col-lg-5">
+                                   <div class="table-responsive">
+                                       <table class="table table-nowrap mb-0">
+                                           <tbody>
+                                           <tr>
+                                               <th scope="row">Freelance :</th>
+                                               <td>
+                                                   {% if about.freelance ==  1 %}
+                                                       Disponible
+                                                   {% endif %}
+
+                                                   {% if about.freelance ==  2 %}
+                                                       Indisponible
+                                                   {% endif %}
+                                               </td>
+
+                                           </tr>
+
+                                           <tr>
+                                               <th scope="row">Langue :</th>
+                                               <td>
+                                                   {% set lang = about.langue |split(';') %}
+
+                                                       {% for l in lang  %}
+                                                           <b class="badge badge-success ml-1">{{ l }}</b>
+                                                       {% endfor %}
+
+                                               </td>
+
+                                           </tr>
+
+                                           <tr>
+                                               <th scope="row">Skype :</th>
+                                               <td> {{ about.skype }}</td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Github :</th>
+                                               <td> {{ about.github }}</td>
+
+                                           </tr>
+                                           <tr>
+                                               <th scope="row">Linkedin :</th>
+                                               <td> {{ about.linkedin }}</td>
+
+                                           </tr>
+
+                                           <tr>
+                                               <th scope="row">Xing :</th>
+                                               <td> {{ about.xing }}</td>
+                                           </tr>
+
+                                           </tbody>
+                                       </table>
+                                   </div>
+
+                               </div>
+                         </div>
+                            {% endif %}
+                            {% if about.count == 0 %}
+                            <div class="row pt-4" >
+                                    <button class="offset-4 col-lg-4 btn-block btn btn-sm btn-success align-content-center" id="usemyUserinfotoportfolio"
+                                            onclick="usemyUserinfotoportfolio()">Utiliser mes informations d'utilisateur</button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                {% include('gestion/portfolio/modal/_aboutchange.twig') %}
+                {% include('gestion/portfolio/modal/_edu.twig') %}
+                {% include('gestion/portfolio/modal/_exp.twig') %}
+                {% include('gestion/portfolio/modal/_skill.twig') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="eduexpeskillpanel">
+                            <div>
+                                <div class="card-title">Education & Experience & Compétence</div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="card p-2">
+                                            <div class="row">
+                                                    <div class="col-lg-11">
+                                                        <h5>Education </h5>
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                        <a href="#"  data-toggle="modal" data-target=".bs-example-modal-xl" ><small  class="btn  btn-success btn-sm">+</small></a>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                        {% for ed in edu %}
+                                                  <div class="card">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col-md-4 align-item-center" style="background-color: #2599bf;height: 100px;">
+                                                            <p style="text-align: center;"><i class="bx bx-book-open " style="font-size: 52px;color: #fff;padding-top: 20px;" ></i></p>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ ed.titre }}</h5>
+                                                                <small class="card-text">{{ ed.description }}</small>
+                                                                <p class="card-text"><small class="text-muted">Année : {{  ed.date_interval}}</small></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-1">
+                                                            <a href="javascript:void(0)" onclick="updateeduform('{{ ed.id_edu }}','{{ ed.type }}')"><i class="bx bx-pencil text-info"></i></a>
+                                                            <a href="javascript:void(0)" onclick="deleteEdForm('{{ ed.id_edu }}')" ><i class="bx bx-trash text-danger"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-6 mb-2">
+                                       <div class="card p-2">
+                                           <div class="row">
+                                               <div class="col-lg-11">
+                                                   <h5>Experience </h5>
+                                               </div>
+                                               <div class="col-lg-1">
+                                                   <a href="javascript:void(0)" data-toggle="modal" data-target=".b-example-modal-xl"><small  class="btn  btn-success btn-sm">+</small></a>
+                                               </div>
+                                           </div>
+                                       </div>
+                                        {% for ex in exp %}
+                                            <div class="card">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-md-4 align-item-center" style="background-color: #2599bf;height: 100px;">
+                                                        <p style="text-align: center;"><i class="bx bxs-certification" style="font-size: 52px;color: #fff;padding-top: 20px;" ></i></p>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ ex.titre }}</h5>
+                                                            <small class="card-text">{{ ex.description }}</small>
+                                                            <p class="card-text"><small class="text-muted">Année : {{  ex.date_interval}}</small></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                        <a href="javascript:void(0)" onclick="updateeduform('{{ ex.id_edu }}','{{ ex.type }}')"><i class="bx bx-pencil text-info"></i></a>
+                                                        <a href="javascript:void(0)" onclick="deleteEdForm('{{ ex.id_edu }}')" ><i class="bx bx-trash text-danger"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-12">
+                                       <div class="card p-2">
+                                           <div class="row">
+                                               <div class="col-lg-11">
+                                                   <h5>Competences </h5>
+                                               </div>
+                                               <div class="col-lg-1">
+                                                   <p style="text-align: right;">  <a href="" class=""  data-toggle="modal" data-target=".skill-example-modal-xl"><small  class="btn  btn-success btn-sm">+</small></a>
+                                                   </p>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                         <div class="row">
+                                             <div class="col-lg-12">
+                                                 <div class="card">
+                                                    <div class="row">
+                                                     <div class="col-lg-12">
+                                                         {% for skill in skills %}
+                                                             <div class=" btn btn-info btn-sm m-2">{{ skill.designation }}</div>
+                                                         {% endfor %}
+                                                     </div>
+                                                    </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+    </div>
+{% endblock %}

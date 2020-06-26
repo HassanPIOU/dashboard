@@ -1,0 +1,57 @@
+<div class="modal fade bs-example-modal-xl" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Creation de l'equipe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="datatable" class="table table-borderless dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width: 70px;">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Projet</th>
+                        <th scope="col">Choisir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                        <td>
+                            <div class="avatar-xs">
+                               <span class="avatar-title rounded-circle" style="text-transform: uppercase">{{ user.username | slice(0,1) }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{ user.lastname }} {{ user.firstname }}</a></h5>
+                            <p class="text-muted mb-0">{{ user.poste }}</p>
+                        </td>
+                        <td>{{ user.email }}</td>
+
+                        <td>
+                            125
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-sm" id="team_add_{{ user.id }}" onclick="team_add('{{ user.id }}')"><i class="mdi mdi-plus"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="team_remove('{{ user.id }}')"><i class="mdi mdi-close"></i></button>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="projetId" value="">
+                <button type="button" class="btn btn-secondary" id="modal_dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="createteambtn" onclick="createteambtn()">valider</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

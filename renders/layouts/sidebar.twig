@@ -1,0 +1,157 @@
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
+
+        <div id="sidebar-menu">
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="/dashboard" class="waves-effect">
+                        <i class="bx bx-home-circle"></i>
+                        <span>Dashboards</span>
+                    </a>
+                </li>
+
+            {% if auth().chat == 1 %}
+                <li class="menu-title">Chat</li>
+                <li>
+                    <a href="/reseaux-sociaux">
+                        <i class="bx bx-comment"></i>
+                        <span class="badge badge-pill badge-info float-right">{{ countMessage() }}</span>
+                        <span>Reseaux Sociaux</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-user-detail"></i>
+                        <span>Contacts</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/customers">Clients</a></li>
+                        <li><a href="/partenaires">Partenaires</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/send-message-sms">SMS</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% if auth().app == 1 %}
+                <li class="menu-title">Apps</li>
+                {% endif %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-widget"></i>
+                        <span>Manage Sites</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="javascript: void(0);" class="has-arrow">Site Web</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="javascript: void(0);">Home</a></li>
+                                <li><a href="javascript: void(0);">About</a></li>
+                                <li><a href="javascript: void(0);">Services</a></li>
+                                <li><a href="javascript: void(0);">portfolio</a></li>
+                                <li><a href="javascript: void(0);">Blog</a></li>
+                                <li><a href="javascript: void(0);">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript: void(0);" class="has-arrow">Mon Portfolio</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="/mon-portfolio-home">Home</a></li>
+                                <li><a href="/mon-portfolio-about">About</a></li>
+                                <li><a href="mon-portfolio-portfolio">portfolio</a></li>
+                                <li><a href="/mon-portfolio-blog">Blog</a></li>
+                                <li><a href="/mon-portfolio-contact">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/packages">Packages</a></li>
+                    </ul>
+                </li>
+                {% if auth().app == 1 %}
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-receipt"></i>
+                        <span>Factures</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/liste-facture">Liste</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-briefcase-alt-2"></i>
+                        <span>Projets</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/ajouter-projet">Ajouter projet</a></li>
+                        <li><a href="/projet-liste">Liste des projets </a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if auth().util == 1 %}
+                <li class="menu-title">Utils</li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-file"></i>
+                            <span>Utils</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/domain/whois">Nom de domaine</a></li>
+                            <li><a href="/backup-database">Base de donnée</a></li>
+                            <li><a href="/server-info">Server Info</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-code"></i>
+                            <span>Menu dévéloppeur</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/manage-access-token">Token D'acces</a></li>
+                            <li><a href="/swagger/index.html">Documentation API</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/parametre"><i class="bx bx-wrench font-size-16 align-middle mr-1"></i> Paramêtres </a></li>
+                {% endif %}
+                {% if auth().admin == 1 %}
+                <li class="menu-title">Administration</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-money"></i>
+                        <span>Paiement</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/paiement">Comptabilité</a></li>
+                    </ul>
+                </li>
+                <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-shield-quarter"></i>
+                            <span>Profil</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/ajouter-profil">Creer le Profil</a></li>
+                            <li><a href="/liste-profil">Liste des Profils</a></li>
+                        </ul>
+                    </li>
+               <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-user"></i>
+                            <span>Utilisateurs</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/users-liste">Liste</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
