@@ -1,7 +1,7 @@
 function getfacebookCount() {
      $('#facebook_like').html("0")
     var page_id = "2264803553830483"
-    var accesstoken = "EAADnJicyLhgBAP7DtZC46tTWfBpeZAq8Lo15trgLZBohsyPAq15jsQeRayUpF8RG1p5lSjDssLYFfm3Cq7tPqulOZAXER0nxWieq4PgHXySh6KW1UYtTeLg1FG8ZAXqEICTdoFj3t8SPHZBFHO9uLv8HuLwaftwU5UJ45tJDadiQZDZD"
+    var accesstoken = "EAADnJicyLhgBANahlQ6ZCqZATla9vx7BV3lRgttsKp6Qgkg9aOFVDVWaOjBfZCm7alBq7VWBi2ZCYTYWjdxaaoyZCVulQIxTkmbrqvyZA72rAbT9ZA1vdvBMIDn82KrTIZBGidfULGMMoXEUHeTZAcFBvzyAZCPJAuKVDmjyiEsZA7w0y4OFsDwME7bTL0ZAuedcIcgg3Pu7Hlp73gZDZD"
     $.getJSON('https://graph.facebook.com/'+page_id+'?fields=name,fan_count&access_token='+accesstoken, function(data) {
         $('#facebook_like').html(add_commas(data.fan_count))
     });
