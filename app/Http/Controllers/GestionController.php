@@ -343,7 +343,8 @@ class GestionController extends Controller
          'duration' => $params['duration_portfolio'],
          'technologies' => $params['technology_used_portfolio'],
          'budget' => $params['budget_portfolio'],
-         'picture' => $picture
+         'picture' => "localhost:8000/uploads/portfolio/portfolio/".$picture,
+            'user_id' => Auth::user()->id
         ];
           if (PortfolioPortfolio::create($data)){
              echo "true";
@@ -369,9 +370,10 @@ class GestionController extends Controller
             'title' => $params['titre'],
             'tag' => $params['tag'],
             'slug' => $params['slug'],
-            'picture' => $file,
+            'picture' => "localhost:8000/uploads/portfolio/blog/".$file,
             'content' => $params['description'],
-            'author' => Auth::user()->id,
+            'author' => Auth::user()->firstname.' '.Auth::user()->lastname,
+            'user_id' => Auth::user()->id,
             'status' => $params['status'],
         ];
 

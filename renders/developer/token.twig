@@ -78,7 +78,8 @@
                                        <tr>
                                            <td>#</td>
                                            <td>{{ token.name_token }}</td>
-                                           <td><input  style="border: none;width: 530px;" readonly value="{{ token.token_key}}"  id="tok_{{ token.id_token }}" data-id="{{ token.id_token }}">
+                                           <td>
+                                               <input  style="border: none;width: 530px;" readonly value="{{ token.token_key}}"  id="tok_{{ token.id_token }}" data-id="{{ token.id_token }}">
                                                    <img  style="cursor: pointer;"  id="tokenfrom_{{ token.id_token }}" onclick="clipboardCop(this)"
                                                          class="copyBtn btn btn-outline-dark btn-sm"
                                                          data-toggle="tooltip"  data-placement="top" title="Copier dans le presse-papier"

@@ -5,8 +5,6 @@ function clipboardCop(event){
 // event handler
 function copyToClipboard(ev) {
 
-
-
     var
         c = ev.getAttribute("data-copytarget"),
         inp = (c ? document.querySelector(c) : null);

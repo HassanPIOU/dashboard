@@ -66,9 +66,9 @@ class PorfolioAPIController extends ResfulController
 
              $skill=  PortfolioSkill::where(['user_id' => $User['id']])->get();
 
-             $work =  PortfolioPortfolio::where(['user_id' => $User['id']])->get();
+             $work =  PortfolioPortfolio::where(['user_id' => $User['id'], 'status' => 1])->get();
 
-             $blog =  PortfolioBlog::where(['user_id' => $User['id']])->get();
+             $blog =  PortfolioBlog::where(['user_id' => $User['id'], 'status' => 1])->orderBy('id', 'DESC')->get();
 
 
              $r = [
@@ -92,6 +92,28 @@ class PorfolioAPIController extends ResfulController
          }
     }
 
+    public function detailBlog(ServerRequestInterface $request){
+        $clientId = $request->getAttribute('clientID');
+        $token =  $request->getAttribute('access-token');
+        $result = $this->AuthChecker($clientId,$token);
+        $slug =  $request->getAttribute('slug');
+        if ($result == []){
+            $User = User::where(['clientID' => $clientId])->first();
+
+            $detail = PortfolioBlog::join('users', 'portfolio_blogs.user_id', '=', 'users.id')->where(['portfolio_blogs.slug' => $slug,  'portfolio_blogs.user_id' => $User['id'] ])->first();
+
+            $r = [
+                'status' => 000,
+                'detail' => $detail,
+            ];
+
+
+            return View::Json(compact('r'));
+        }
+        else{
+            return View::Json($result);
+        }
+    }
 
     public function addContact(ServerRequestInterface $request){
         $clientId = $request->getAttribute('clientID');
